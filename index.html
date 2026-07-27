@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <video id="background-video" autoplay loop playsinline>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
+    <script>
+        const video = document.getElementById("background-video");
+
+        // Try to start the video with sound
+        video.muted = false;
+
+        video.play().catch(() => {
+            // If the browser blocks autoplay with sound,
+            // start it after the first click anywhere
+            document.addEventListener("click", () => {
+                video.muted = false;
+                video.play();
+            }, { once: true });
+        });
+    </script>
+
+</body>
+</html>
