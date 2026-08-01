@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,25 +10,30 @@
 
 <body>
 
-    <video id="background-video" autoplay loop playsinline>
-        <source src="video.mp4" type="video/mp4">
-    </video>
+```
+<div id="enter-screen">
+    <button id="enter-button">ENTER</button>
+</div>
 
-    <script>
-        const video = document.getElementById("background-video");
+<video id="background-video" loop playsinline>
+    <source src="video.mp4" type="video/mp4">
+</video>
 
-        // Try to start the video with sound
-        video.muted = false;
+<script>
+    const enterScreen = document.getElementById("enter-screen");
+    const enterButton = document.getElementById("enter-button");
+    const video = document.getElementById("background-video");
 
-        video.play().catch(() => {
-            // If the browser blocks autoplay with sound,
-            // start it after the first click anywhere
-            document.addEventListener("click", () => {
-                video.muted = false;
-                video.play();
-            }, { once: true });
-        });
-    </script>
+    enterButton.addEventListener("click", async () => {
+        try {
+            await video.play();
+            enterScreen.classList.add("hidden");
+        } catch (error) {
+            console.error("Video could not start:", error);
+        }
+    });
+</script>
+```
 
 </body>
 </html>
